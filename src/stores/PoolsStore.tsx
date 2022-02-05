@@ -73,7 +73,7 @@ export default class PoolsStore {
   };
 
   syncPoolsStats = async () => {
-    const data = await statsService.getStats();
+    const data = await statsService.pools();
     const formattedData = Object.entries(data).reduce((acc, [poolId, obj]) => {
       const bnFormat = Object.entries(obj as IStatsPoolItemResponse).reduce(
         (ac, [propertyName, propertyValue]) => {

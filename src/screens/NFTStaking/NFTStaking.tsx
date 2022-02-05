@@ -3,11 +3,10 @@ import React from "react";
 import { Observer } from "mobx-react-lite";
 import Layout from "@components/Layout";
 import Text from "@components/Text";
-import { NFTStakingVMProvider } from "./NFTStakingVM";
+import { NFTStakingVMProvider, useNFTStakingVM } from "./NFTStakingVM";
 import GoBack from "@components/GoBack";
 import SizedBox from "@components/SizedBox";
 import NFTCard from "@screens/NFTStaking/NFTCard";
-import eagle from "@src/assets/nfts/eagle.png";
 
 const Root = styled.div`
   display: flex;
@@ -35,51 +34,8 @@ const NFTContainer = styled.div`
     column-gap: 16px;
   }
 `;
-const array = [
-  {
-    src: eagle,
-    price: "~ 3,099 $",
-    boostAPY: 10.11,
-    name: "Early eagle",
-    isInOwn: true,
-  },
-  {
-    src: eagle,
-    price: "~ 3,099 $",
-    boostAPY: 10.11,
-    name: "Early eagle",
-    isInOwn: true,
-  },
-  {
-    src: eagle,
-    price: "~ 3,099 $",
-    boostAPY: 10.11,
-    name: "Early eagle",
-    isInOwn: true,
-  },
-  {
-    src: eagle,
-    price: "~ 3,099 $",
-    boostAPY: 10.11,
-    name: "Early eagle",
-    isInOwn: true,
-  },
-  {
-    src: eagle,
-    price: "~ 3,099 $",
-    boostAPY: 10.11,
-    name: "Early eagle",
-    isInOwn: true,
-  },
-  {
-    src: eagle,
-    price: "~ 3,099 $",
-    boostAPY: 10.11,
-    name: "Early eagle",
-    isInOwn: true,
-  },
-];
 const NFTStakingImpl: React.FC = () => {
+  const vm = useNFTStakingVM();
   return (
     <Layout>
       <Observer>
@@ -103,8 +59,8 @@ const NFTStakingImpl: React.FC = () => {
             </Text>
             <SizedBox height={8} />
             <NFTContainer>
-              {array.map((i, index) => (
-                <NFTCard {...i} key={index} typeId="12312" />
+              {vm.artworks.map((artwork) => (
+                <NFTCard key={artwork.nft} artwork={artwork} />
               ))}
             </NFTContainer>
           </Root>
